@@ -18,37 +18,11 @@ RUN apt-get -y update && apt-get -y install koha-common
 
 RUN a2enmod rewrite
 
+RUN /etc/init.d/mysql start; koha-create --create-db knihovna; koha-translate --install cs-CZ
 
-RUN /etc/init.d/mysql start; koha-create --create-db knihovna
-#
-## Set Apache rewrite
-#RUN a2enmod rewrite
-#
-## Restart Apache
-#RUN service apache2 restart
-#
-## Install Koha package
-#RUN apt-get install koha-common
-#
-## Install MySQL server package
-#RUN apt-get install mysql-server
-#
-#
-## Create instance of Koha
-#RUN koha-create --create-db knihovna
-#
-## Install Czech language
-#RUN koha-translate –-install cs-CZ
-#
-#
-#
-###################### INSTALLATION END #####################
-## Expose the default port
-#EXPOSE 27017
-#
-## Default port to execute the entrypoint (MongoDB)
-#CMD ["--port 27017"]
-#
-## Set default container command
-#ENTRYPOINT usr/bin/mongod
+RUN rm /etc/apache2/sites-enabled/000-default
 
+RUN sed 's/ServerName knihovna.myDNSname.org//' /etc/apache2/sites-enabled/knihovna.conf > knihovna.conf && \
+    mv knihovna.conf /etc/apache2/sites-enabled/knihovna.conf
+
+ADD init.sh /init.sh
