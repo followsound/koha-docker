@@ -30,4 +30,8 @@ RUN rm /etc/apache2/sites-enabled/000-default
 RUN sed 's/ServerName .*//' /etc/apache2/sites-enabled/knihovna.conf > knihovna.conf && \
     mv knihovna.conf /etc/apache2/sites-enabled/knihovna.conf
 
+RUN perl -MCPAN -e 'install Data::Pagination' &&  \
+    perl -MCPAN -e 'upgrade Archive::Extract ' && \
+    perl -MCPAN -e 'upgrade Test::WWW::Mechanize'
+
 ADD init.sh /init.sh
