@@ -35,7 +35,7 @@ RUN apt-get -y install make
 RUN perl -MCPAN -e 'install Data::Pagination' &&  \
     perl -MCPAN -e 'upgrade Archive::Extract' && \
     perl -MCPAN -e 'upgrade Test::WWW::Mechanize' && \
-    perl -MCPAN -e 'upgrade HTTPD::Bench::ApacheBench' && \
+    perl -MCPAN -e 'upgrade HTTPD::Bench::ApacheBench'
 RUN mv /etc/koha /etc/kohaDefault && ln -s /koha-data/etc-koha /etc/koha
 RUN mv /var/lib/mysql /var/lib/mysqlDefault && ln -s /koha-data/mysql-data /var/lib/mysql
 
