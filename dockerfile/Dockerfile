@@ -4,12 +4,12 @@ FROM debian:wheezy
 # File Author / Maintainer
 MAINTAINER opensource.knihovna.cz
 
-RUN echo "Version: 2014062"
+ENV REFRESHED_AT 2014-09-26
 
 ENV PATH /usr/bin:/bin:/usr/sbin:/sbin
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get -y update && apt-get -y install vim mc wget mysql-server
+RUN apt-get -y update && apt-get -y install vim mc wget mysql-server gcc
 
 ADD koha.list /etc/apt/sources.list.d/koha.list 
 
@@ -34,9 +34,8 @@ RUN sed 's/ServerName .*//' /etc/apache2/sites-enabled/knihovna.conf > knihovna.
 RUN apt-get -y install make
 RUN perl -MCPAN -e 'install Data::Pagination' &&  \
     perl -MCPAN -e 'upgrade Archive::Extract' && \
-    perl -MCPAN -e 'upgrade Test::WWW::Mechanize' 
-# && \
-    #perl -MCPAN -e 'install HTTPD::Bench::ApacheBench'
+    perl -MCPAN -e 'upgrade Test::WWW::Mechanize' && \
+    perl -MCPAN -e 'install HTTPD::Bench::ApacheBench'
 RUN mv /etc/koha /etc/kohaDefault && ln -s /koha-data/etc-koha /etc/koha
 RUN mv /var/lib/mysql /var/lib/mysqlDefault && ln -s /koha-data/mysql-data /var/lib/mysql
 
