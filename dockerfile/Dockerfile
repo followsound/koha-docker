@@ -23,7 +23,7 @@ RUN sed 's/INTRAPORT="80"/INTRAPORT="8080"/' /etc/koha/koha-sites.conf > koha-si
 
 RUN echo "Listen 8080 " >> /etc/apache2/ports.conf
 
-RUN /etc/init.d/mysql start; koha-create --create-db knihovna; /etc/init.d/koha-common stop; /etc/init.d/apache2 stop; /etc/init.d/mysql stop; sleep 10
+RUN /etc/init.d/mysql start; sleep 10; koha-create --create-db knihovna; /etc/init.d/koha-common stop; /etc/init.d/apache2 stop; /etc/init.d/mysql stop; sleep 10
 
 RUN koha-translate --install cs-CZ;
 RUN rm /etc/apache2/sites-enabled/000-default
@@ -38,5 +38,8 @@ RUN perl -MCPAN -e 'install Data::Pagination' &&  \
     perl -MCPAN -e 'install HTTPD::Bench::ApacheBench'
 RUN mv /etc/koha /etc/kohaDefault && ln -s /koha-data/etc-koha /etc/koha
 RUN mv /var/lib/mysql /var/lib/mysqlDefault && ln -s /koha-data/mysql-data /var/lib/mysql
+
+ADD etc-koha.tar /tmp/
+ADD mysql-data.tar /tmp/
 
 ADD init.sh /init.sh
