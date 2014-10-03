@@ -1,0 +1,13 @@
+mysql:
+  image: mysql
+  environment:
+   #- MYSQL_USER=koha
+   - MYSQL_ROOT_PASSWORD=tajneHeslo
+   #- MYSQL_DATABASE=koha
+adminer:
+  image: clue/adminer
+  links:
+   - mysql:mysql
+  ports:
+   - "81:80"
+
