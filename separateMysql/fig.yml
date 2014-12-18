@@ -1,0 +1,21 @@
+mysql:
+  image: mysql
+  environment:
+   - MYSQL_USER=koha_knihovna
+   - MYSQL_PASSWORD=tajneHeslo
+   - MYSQL_ROOT_PASSWORD=tajneHeslo
+   - MYSQL_DATABASE=koha_knihovna
+adminer:
+  image: clue/adminer
+  links:
+   - mysql:mysql
+  ports:
+   - "81:80"
+koha:
+  image: koha-dev
+  links:
+    - mysql:mysql
+  ports:
+    - "80:80"
+    - "8080:8080"
+  command: sleep 3600
