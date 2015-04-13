@@ -39,3 +39,5 @@ koha:
     - "80:80"
     - "8080:8080"
 ```
+
+poté příkazem `docker compose up -d`  pustíme.
