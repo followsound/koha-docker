@@ -41,3 +41,5 @@ koha:
 ```
 
 poté příkazem `docker compose up -d`  pustíme.
+
+Po chvíli se Koha spustí na standardním portu 80 a její administrátorské rozhraní na portu 8080. Na portu 81 běží adminer (pozor do admineru do host je nutné zadat mysql, nikoliv localhost).
