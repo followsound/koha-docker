@@ -36,5 +36,8 @@ RUN perl -MCPAN -e 'install Data::Pagination' &&  \
     perl -MCPAN -e 'upgrade Test::WWW::Mechanize' && \
     perl -MCPAN -e 'install HTTPD::Bench::ApacheBench'
 
+
 ADD import.sql /import.sql
-ADD init.sh /init.sh
+ADD docker-entrypoint.sh /docker-entrypoint.sh
+
+ENTRYPOINT /docker-entrypoint.sh
