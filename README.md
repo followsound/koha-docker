@@ -10,3 +10,26 @@ Pro spuštění je nutné mít nainstalované dvě komponenty:
 - http://docs.docker.com/compose/install/
 
 Protože se Koha skládá z více docker kontejnerů, tak je nutné je za pomocí nástroje docker-compose spojit.
+
+```
+mysql:
+  image: mysql
+  environment:
+   - MYSQL_USER=koha_knihovna
+   - MYSQL_PASSWORD=tajneHeslo
+   - MYSQL_ROOT_PASSWORD=tajneHeslo
+   - MYSQL_DATABASE=koha_knihovna
+adminer:
+  image: clue/adminer
+  links:
+   - mysql:mysql
+  ports:
+   - "81:80"
+koha:
+  build: .
+  links:
+    - mysql:mysql
+  ports:
+    - "80:80"
+    - "8080:8080"
+```
