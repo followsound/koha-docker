@@ -32,7 +32,7 @@ adminer:
   ports:
    - "81:80"
 koha:
-  build: .
+  image: opensourceknihovna/koha-docker
   links:
     - mysql:mysql
   ports:
