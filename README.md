@@ -9,8 +9,14 @@ Pro spuštění je nutné mít nainstalované dvě komponenty:
 - http://docs.docker.com/installation/debian/
 - http://docs.docker.com/compose/install/
 
-Protože se Koha skládá z více docker kontejnerů, tak je nutné je za pomocí nástroje docker-compose spojit.
+Koha  se skládá z více docker kontejnerů:
+- mysql
+- adminer
+- samotná Koha
 
+Tyto kontejnery je nutné za pomocí nástroje docker-compose spojit.
+
+vytvoříme soubor `docker-compose.yml`
 ```
 mysql:
   image: mysql
