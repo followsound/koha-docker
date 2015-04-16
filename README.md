@@ -35,6 +35,8 @@ koha:
   image: opensourceknihovna/koha-docker
   links:
     - mysql:mysql
+  environment:
+    - KOHA_PASSWORD=tajneHeslo
   ports:
     - "80:80"
     - "8080:8080"
